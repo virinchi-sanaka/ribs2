@@ -143,14 +143,12 @@ inline void yield(void) {
     ribs_swapcurcontext(epoll_worker_get_last_context());
 }
 
+/*
 int queue_current_ctx(void) {
     while (0 > write(queue_ctx_fd, &current_ctx, sizeof(void *))) {
         if (EAGAIN != errno)
             return LOGGER_PERROR("unable to queue context: write"), -1;
-        /* pipe is full!!! wait for it to clear
-           This is switching to LIFO mode, which can cause IO starvation
-           if too many contexes are trying to use this facility, very unlikely
-        */
+
         LOGGER_INFO("Warning: context queue is full");
         struct ribs_context *previous_context = epoll_worker_fd_map[queue_ctx_fd].ctx;
         epoll_worker_fd_map[queue_ctx_fd].ctx = current_ctx;
@@ -166,3 +164,4 @@ inline void courtesy_yield(void) {
     queue_current_ctx();
     ribs_swapcurcontext(epoll_worker_get_last_context());
 }
+*/
